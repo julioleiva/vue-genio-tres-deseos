@@ -2,11 +2,11 @@
     <div class="row">
         <form>
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-md-6 col-md-offset-3 form-group">
-                <label>Quote</label>
-                <textarea class="form-control" rows="3" v-model="quote"></textarea>
+                <label>Deseo</label>
+                <textarea class="form-control" rows="3" v-model="deseo"></textarea>
             </div>
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-md-6 col-md-offset-3 form-group">
-               <button class="btn btn-primary" @click.prevent="createNew">Add Quote</button>
+               <button class="btn btn-primary" @click.prevent="createNew">Pedir Deseo</button>
             </div>
         </form>
     </div>
@@ -16,13 +16,13 @@
     export default {
         data: function() {
             return {
-                quote: ''
+                deseo: ''
             };
         },
         methods: {
             createNew() {
-                this.$emit('quoteAdded', this.quote);
-                this.quote = '';
+                this.$emit('deseoAdded', this.deseo);
+                this.deseo = '';
             }
         }
     }

@@ -1,44 +1,49 @@
 <template>
     <div class="container">
-        <app-header :quoteCount="quotes.length" :maxQuotes="maxQuotes"></app-header>
-        <app-new-quote @quoteAdded="newQuote"></app-new-quote>
-        <app-quote-grid :quotes="quotes" @quoteDeleted="deleteQuote"></app-quote-grid>
+        <app-header :deseoCount="deseos.length" :maxDeseos="maxDeseos"></app-header>
+        <app-new-deseo @deseoAdded="newDeseo" :v-if="visibilidad"></app-new-deseo>
+        <app-deseo-grid :deseos="deseos" @deseoDeleted="deleteDeseo"></app-deseo-grid>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <div class="alert alert-info">Info: Click on a Quote to delete it!</div>
+                <div class="alert alert-info">{{ info }}</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import QuoteGrid from './components/QuoteGrid.vue';
-    import NewQuote from './components/NewQuote.vue';
+    import DeseoGrid from './components/DeseoGrid.vue';
+    import NewDeseo from './components/NewDeseo.vue';
     import Header from './components/Header.vue';
 
     export default {
         data: function () {
             return {
-                quotes: [
-                    'Just a Quote to see something'
+                deseos: [
+                    // 'Just a Deseo to see something'
                 ],
-                maxQuotes: 10
-            }
+                maxDeseos: 3,
+                info:'Info: Pulsa en un deseo para eliminarlo!',
+                visibilidad:true
+              }
         },
+        props:['visible'],
         methods: {
-            newQuote(quote) {
-                if (this.quotes.length >= this.maxQuotes) {
-                    return alert('Please delete Quotes first!');
+            newDeseo(deseo) {
+                if (this.deseos.length >= this.maxDeseos) {
+                    return this.info = 'Eres un avaricioso, lo has perdido todo';
+                    return this.visibilidad= false;
+
                 }
-                this.quotes.push(quote);
+                this.deseos.push(deseo);
             },
-            deleteQuote(index) {
-                this.quotes.splice(index, 1);
+            deleteDeseo(index) {
+                this.deseos.splice(index, 1);
             }
         },
         components: {
-            appQuoteGrid: QuoteGrid,
-            appNewQuote: NewQuote,
+            appDeseoGrid: DeseoGrid,
+            appNewDeseo: NewDeseo,
             appHeader: Header
         }
     }
